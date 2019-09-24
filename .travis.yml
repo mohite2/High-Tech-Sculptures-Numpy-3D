@@ -1,4 +1,4 @@
-# Travis CI configuration file
+# Travis CI configuration
 language: python
 
 matrix:
