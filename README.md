@@ -1,4 +1,4 @@
-## IS590PR assignment 4: "High-Tech Sculptures" 
+## IS590PR Assignment 4: "High-Tech Sculptures" 
 ### (Manipulating Numpy 3D arrays)
 
 Complete this solution program so that all Doctests work properly and it solves 
@@ -66,14 +66,21 @@ These Khan Academy pages on Center of Mass are helpful to understand problem 2:
     (the "Topple Limit" section in this page helps explain problem 2 above. 
     But you are not required to compute tipping angles)
     
-### Steps to Get Started (mostly shown in class):
+### Steps to Get Started:
 
-0. Do this assignment individually (no teams, so you won't have any problems with git merge conflicts.)
-1. Create one and only one fork of this repository.  
-2. In the GitHub website, immediately go to your new repository,
+0. It is recommended that you do this assignment individually (which avoids the
+    complications of git merge conflicts). But a team of 
+    TWO is permitted, in which case YOU MUST BOTH make substantive commits to 
+    your shared repository to receive credit for the work. DO NOT WORK WITH THE 
+    SAME student you already have on prior assignments!
+1. Create one and only one fork of this repository per team.  
+2. In the GitHub website, immediately go to your new repository.
 3. click "Settings" tab
 4. click "Collaborators & Teams"
-5. click the X to REMOVE the "All_Students" team from having access to your repository.  **Warning!**  We'll deduct 20% from your score if you don't.
+5. REMOVE the "All_Students" team from having access to your 
+    repository.  **Warning!**  We'll deduct 20% from your score if you don't.
+    If you have a team of two, you must add the partner as a Collaborator 
+    with WRITE permission.
 6. Return to the \<Code\> tab in YOUR new repository in GitHub.
 7. Click "Clone or Download" to get the link you need for PyCharm.
 8. As shown in the video and in class session 4, create a new PyCharm project from your repository.
@@ -83,7 +90,7 @@ These Khan Academy pages on Center of Mass are helpful to understand problem 2:
 
 
 OPTIONAL: 
-Try this to experiment with continuous integration. If you do this successfully, 
+Try to experiment with continuous integration. If you do this successfully, 
 but have mistakes elsewhere, it can supplant up to 10% of the score.
 
 Configure TravisCI to work on your repository and show proof, such as
