@@ -1,13 +1,12 @@
 ## IS590PR assignment 4: "High-Tech Sculptures" 
 ### (Manipulating Numpy 3D arrays)
 
-
 Complete this solution program so that all Doctests work properly and it solves 
 the problems described.  Some empty functions are included to help guide you. 
 You may add or modify their parameters and may create additional functions as 
 well.
 
-### The Scenario:
+### The Scenario
 Suppose we are trying to carve a lasting sculpture from a "marble" block, and its
 intended final 3D shape is given with a 3D array, containing just 1s and 0s to 
 indicate where it will be solid vs empty (removed).
@@ -19,7 +18,7 @@ from 3 axes.
 
 Before we 'carve' or 'sculpt' the shapes from these expensive marble blocks, 
 we want to determine which is the best orientation (rotation) to use for each 
-one. 'Best' will be determined by calculating mean density and stability of the 
+one. Best will be determined by calculating mean density and stability of the 
 sculptures that would result.
 
 The output should look similar to this, but these numbers are made up. 
@@ -27,22 +26,21 @@ Within each block's results, order by stability, then by density (descending):
 
     Shape File: shape_1.npy
         Block File: marble_block_X.npy   
-        Rotation: 180 axis 0 to 1                  Mean density: 78.24  Stable
-        Rotation: 180 axis 0 to 1, 90 axis 1 to 2  Mean density: 48.24  Stable
-        Rotation:  90 axis 1 to 2                  Mean density: 64.11  Unstable
-        ...
+            Rotation: 180 axis 0 to 1                  Mean density: 78.24  Stable
+            Rotation: 180 axis 0 to 1, 90 axis 1 to 2  Mean density: 48.24  Stable
+            Rotation:  90 axis 1 to 2                  Mean density: 64.11  Unstable
+            ...
         
         Block File: marble_block_Y.npy
         ...
 
     Shape File: shape_2.npy
         Block File: marble_block_X.npy   
-        Rotation: 180 axis 0 to 1                  Mean density: 82.04  Stable
-        Rotation:  90 axis 1 to 2                  Mean density: 64.11  Unstable
-        Rotation: 180 axis 0 to 1, 90 axis 1 to 2  Mean density: 48.24  Unstable
+            Rotation: 180 axis 0 to 1                  Mean density: 82.04  Stable
+            Rotation:  90 axis 1 to 2                  Mean density: 64.11  Unstable
+            Rotation: 180 axis 0 to 1, 90 axis 1 to 2  Mean density: 48.24  Unstable
         ...
         
-
 
 1.	Which block & orientation results in the highest average density, AFTER 
     being 'carved'. I gave you five block data files, but write your program 
@@ -50,7 +48,7 @@ Within each block's results, order by stability, then by density (descending):
     copy-and-paste programming now!  :-)   Your output should display the 
     answer along with the block's filename and the rotations used. TIPS: You'll 
     need the Numpy nanmean() function to get the correct density. For that, 
-    you'll find it overflows with the float16 dtype we have. So convert use 
+    you'll find it overflows with the float16 dtype we have. So convert using 
     astype('float32') before calling nanmean().
 2.	For each possible orientation, determine if the sculpture would be 
     stable & balanced without tipping or leaning. So, you need to compute where 
@@ -84,17 +82,13 @@ These Khan Academy pages on Center of Mass are helpful to understand problem 2:
 11. INCLUDE the output text file in your GitHub repository to make checking your calculations easier.
 
 
-REQUIRED: 
-To get full credit, complete the functions and program to solve the questions above. 
-Also _one_ of these things:
+OPTIONAL: 
+Try this to experiment with continuous integration. If you do this successfully, 
+but have mistakes elsewhere, it can supplant up to 10% of the score.
 
-A.  Write enough Doctests in your program so that the Doctests With Coverage 
-report in PyCharm shows at least 80% actual coverage for the 
-numpy_marble_solution.py file. **OR**
-
-B.  Configure TravisCI to work on your repository and showing proof, such 
-taking a screenshot of your build history and committing that screen shot image 
-into your GitHub repository where we can see it.  Remember you get TravisCI 
-free as part of the GitHub "StudentPack". I have even included a working .travis.yml 
-configuration file to make this much easier. 
+Configure TravisCI to work on your repository and show proof, such as
+taking a screenshot of your build history and including that image 
+in your GitHub repository where we can see it.  Remember you get TravisCI 
+free as part of the GitHub "StudentPack". I have even included a working 
+.travis.yml configuration file to make this much easier. 
  
