@@ -75,7 +75,7 @@ def get_orientations_possible(block: np.ndarray) -> List[List[dict]]:
         [{'k': 3, 'axes': (1, 2)}, {'k': 1, 'axes': (0, 2)}],
         [{'k': 3, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}],
         [{'k': 3, 'axes': (1, 2)}, {'k': 3, 'axes': (0, 2)}],
-        ]
+    ]
 
     # consider the 3-tuple shape of axes numbered 0, 1, 2 to represent (height, depth, width)
     (height, depth, width) = block.shape
@@ -195,7 +195,6 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=False) -> 
 
 
 if __name__ == '__main__':
-
     # This section will need to be changed significantly. What's here are
     #  just some examples of loading and manipulating the arrays.
 
@@ -205,13 +204,15 @@ if __name__ == '__main__':
     # Load one array describing the 3D shape of the sculpture we want to carve from marble:
     shape_1 = np.load(file='data/shape_1.npy')
 
-    print(marble_block_1.shape)
-    print(marble_block_1)
-    print(shape_1.shape)
-    print(shape_1)
-    marble_block_1[shape_1 == 0] = 0
-    print(marble_block_1.shape)
-    print(marble_block_1)
-
-
-    #print('mean density of unmodified block: {:.2f}'.format(np.nanmean(marble_block_1.astype('float32'))))
+    # print(marble_block_1.shape)
+    # print(marble_block_1)
+    # print(shape_1.shape)
+    # print(shape_1)
+    # marble_block_1[shape_1 == 0] = 0
+    # print(marble_block_1.shape)
+    # print(marble_block_1)
+    list1 = [[{'k': 1, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}]]
+    list2 = [[{'k': 1, 'axes': (1, 2)}, {'k': 3, 'axes': (0, 2)}]]
+    are_rotations_unique(list1)
+    are_rotations_unique(list2)
+    # print('mean density of unmodified block: {:.2f}'.format(np.nanmean(marble_block_1.astype('float32'))))
