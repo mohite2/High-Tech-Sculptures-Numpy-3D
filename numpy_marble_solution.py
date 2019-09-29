@@ -206,6 +206,12 @@ if __name__ == '__main__':
     shape_1 = np.load(file='data/shape_1.npy')
 
     print(marble_block_1.shape)
+    print(marble_block_1)
     print(shape_1.shape)
+    print(shape_1)
+    marble_block_1[shape_1 == 0] = 0
+    print(marble_block_1.shape)
+    print(marble_block_1)
 
-    print('mean density of unmodified block: {:.2f}'.format(np.nanmean(marble_block_1.astype('float32'))))
+
+    #print('mean density of unmodified block: {:.2f}'.format(np.nanmean(marble_block_1.astype('float32'))))
