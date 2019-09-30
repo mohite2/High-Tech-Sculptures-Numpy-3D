@@ -37,8 +37,8 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=True) -> b
     """
     # create a small cube to try all the input rotations. It has unique values so that
     #  no distinct rotations could create an equivalent array by accident.
-    cube = np.arange(0, 54).reshape((6, 3, 3))
-
+    cube = np.arange(0, 27).reshape((3, 3, 3))
+    #why having this cube?
     # Note: In the code below, the arrays must be appended to the orientations_seen
     #  list in string form, because Numpy would otherwise misunderstand the intention
     #  of the if ... in orientations_seen expression.
@@ -54,6 +54,8 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=True) -> b
         r = cube  # start with a view of cube unmodified for comparison
         for r90 in combo:  # apply all the rotations given in this combination
             r = np.rot90(r, k=r90['k'], axes=r90['axes'])
+            print('r90',r90)
+            print('r',r)
         if r.tostring() in orientations_seen:
             if verbose:
                 print(' not unique.')
@@ -69,6 +71,31 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=True) -> b
         orientations_seen.append(r.tostring())
     return True
 
-x=[{'k': 2, 'axes': (0, 1)}, {'k': 3, 'axes': (0, 2)}]
-result=are_rotations_unique([x])
-print(result)
+poss = [
+        [{'k': 1, 'axes': (0, 1)}],  # 1-axis rotations:
+        [{'k': 2, 'axes': (0, 1)}],
+        [{'k': 3, 'axes': (0, 1)}],
+        [{'k': 1, 'axes': (0, 2)}],
+        [{'k': 2, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (0, 2)}],
+        [{'k': 1, 'axes': (1, 2)}],
+        [{'k': 2, 'axes': (1, 2)}],
+        [{'k': 3, 'axes': (1, 2)}],
+        [{'k': 1, 'axes': (0, 1)}, {'k': 1, 'axes': (0, 2)}],  # 2-axis rotations:
+        [{'k': 1, 'axes': (0, 1)}, {'k': 2, 'axes': (0, 2)}],
+        [{'k': 1, 'axes': (0, 1)}, {'k': 3, 'axes': (0, 2)}],
+        [{'k': 2, 'axes': (0, 1)}, {'k': 1, 'axes': (0, 2)}],
+        [{'k': 2, 'axes': (0, 1)}, {'k': 3, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (0, 1)}, {'k': 1, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (0, 1)}, {'k': 2, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (0, 1)}, {'k': 3, 'axes': (0, 2)}],
+        [{'k': 1, 'axes': (1, 2)}, {'k': 1, 'axes': (0, 2)}],
+        [{'k': 1, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}],
+        [{'k': 1, 'axes': (1, 2)}, {'k': 3, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (1, 2)}, {'k': 1, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}],
+        [{'k': 3, 'axes': (1, 2)}, {'k': 3, 'axes': (0, 2)}],
+    ]
+for x in poss:
+    result=are_rotations_unique([x])
+#print(result)

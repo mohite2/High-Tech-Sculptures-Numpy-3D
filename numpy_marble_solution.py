@@ -144,17 +144,20 @@ def get_orientations_possible(block: np.ndarray) -> List[List[dict]]:
 
     # consider the 3-tuple shape of axes numbered 0, 1, 2 to represent (height, depth, width)
     (height, depth, width) = block.shape
-
+    counter=0
     if height == depth == width:
-        print('all in poss')
         return poss  # return all possibilities, it's a cube
     else:
-        pass
-
-    for value in poss:
-        print([value])
-        #list_of_dict = [{} for i in range(singleRotation)]
-        print(are_rotations_unique([value]))
+        for r90 in poss:
+            counter=counter+1
+            print(counter)
+            for mov in r90:
+                print(block.shape)
+                print(mov)
+                block = np.rot90(block, k=mov['k'], axes=mov['axes'])
+                print(block.shape)
+            # list_of_dict = [{} for i in range(singleRotation)]
+            #print(are_rotations_unique([value]))
 
     # TODO: Complete this function for the other situations...
     # Hint, the results will be parts of the 23-item list above, read the Docstring!
@@ -181,7 +184,7 @@ def get_orientations_possible(block: np.ndarray) -> List[List[dict]]:
 
 
 
-def carve_sculpture_from_density_block(shape: np.ndarray, block: np.ndarray) -> np.ndarray:
+def carve_sculpture_from_density_block(shape: np.ndarray, block: np.ndarray) -> int:
     """The shape array guides our carving. It indicates which parts of the
     material block to keep (the 1 values) and which to carve away (the 0 values),
     producing a new array that defines a sculpture and its varying densities.
@@ -194,7 +197,13 @@ def carve_sculpture_from_density_block(shape: np.ndarray, block: np.ndarray) -> 
     """
     # TODO: write the code for this function, which could be as short as one line of code!
     # TODO: Add a few good, working Doctests
-
+    if shape.shape==block.shape:
+        print(block)
+        block[shape == 0] = 0
+        print(block)
+    #return block
+    #why cannot return
+    # sculpture
 
 def is_stable(sculpture: np.ndarray) -> bool:
     """Given a 'sculpted' NDarray, where number values represent densities and
@@ -229,23 +238,25 @@ if __name__ == '__main__':
     #  just some examples of loading and manipulating the arrays.
 
     # Load a "block" of variable-density marble:
-    marble_block_1 = np.load(file='data/marble_block_5.npy')
+    marble_block_1 = np.load(file='data/marble_block_1.npy')
 
     # Load one array describing the 3D shape of the sculpture we want to carve from marble:
     shape_1 = np.load(file='data/shape_1.npy')
 
     # print(marble_block_1.shape)
     # print(marble_block_1)
-    # print(shape_1.shape)
     # print(shape_1)
     # marble_block_1[shape_1 == 0] = 0
     # print(marble_block_1.shape)
     # print(marble_block_1)
+    carve_sculpture_from_density_block(shape_1,marble_block_1)
+    #print(sculpture)
+
     # list1 = [[{'k': 1, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}]]
     # list2 = [[{'k': 1, 'axes': (1, 2)}, {'k': 3, 'axes': (0, 2)}]]
     # are_rotations_unique(list1)
     # are_rotations_unique(list2)
-    marble_block_7 = np.arange(36).reshape((3,3,4))
     #print(marble_block_7)
-    get_orientations_possible(marble_block_1)
+    #get_orientations_possible(marble_block_1)
     # print('mean density of unmodified block: {:.2f}'.format(np.nanmean(marble_block_1.astype('float32'))))
+
