@@ -8,6 +8,7 @@
 #
 # print(ans)
 # print(y)
+import math
 
 import numpy as np
 a = np.random.randint(0, 5, size=(5, 4))
@@ -18,5 +19,6 @@ print(a)
 # print(c)
 d= (a < 3).astype(int)
 print(d)
-a[d==0] = 0
+nan = float('nan')
+a[d==0] =nan
 print(a)

@@ -9,6 +9,7 @@ import os
 import numpy as np
 from scipy.ndimage import center_of_mass
 from typing import List
+from scipy import ndimage
 
 def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=False) -> bool:
     """Given a list of list of 3D rotation combinations suitable for using with np.rot90()
@@ -171,42 +172,6 @@ def get_orientations_possible(block: np.ndarray) -> List[List[dict]]:
     return(sub_poss)
 
 
-        # for r90 in poss:
-        #     counter=counter+1
-        #     print(counter)
-        #     for mov in r90:
-        #         print(block.shape)
-        #         print(mov)
-        #         block = np.rot90(block, k=mov['k'], axes=mov['axes'])
-        #         print(block.shape)
-            # list_of_dict = [{} for i in range(singleRotation)]
-            #print(are_rotations_unique([value]))
-
-    # TODO: Complete this function for the other situations...
-    # Hint, the results will be parts of the 23-item list above, read the Docstring!
-    # elif height==depth and depth !=width:
-    #     # possible=len(are_rotations_unique(poss))
-    #     # print(possible
-    #     print(are_rotations_unique(poss),"1")
-    # elif height!= depth and height!=width and width !=depth:
-    #     # possible = len(are_rotations_unique(poss))
-    #     # print(possible)
-    #     print(are_rotations_unique(poss),"2")
-    # elif height==depth and depth!=width:
-    #     # possible = len(are_rotations_unique(poss))
-    #     # print(possible)
-    #     print(are_rotations_unique(poss),'3')
-    # elif height !=depth and depth==width:
-    #     # possible = len(are_rotations_unique(poss))
-    #     # print(possible)
-    #     print(are_rotations_unique(poss),"4")
-    # elif height==width and depth!=width:
-    #     # possible = len(are_rotations_unique(poss))
-    #     # print(possible)
-    #     print(are_rotations_unique(poss),"5")
-
-
-
 def carve_sculpture_from_density_block(shape: np.ndarray, block: np.ndarray) -> int:
     """The shape array guides our carving. It indicates which parts of the
     material block to keep (the 1 values) and which to carve away (the 0 values),
@@ -222,7 +187,7 @@ def carve_sculpture_from_density_block(shape: np.ndarray, block: np.ndarray) -> 
     # TODO: Add a few good, working Doctests
     if shape.shape==block.shape:
         print(block)
-        block[shape == 0] = 0
+        block[shape == 0] = "NaN"
         print(block)
     #return block
     #why cannot return
@@ -253,7 +218,11 @@ def analyze_sculptures(block_filenames: list, shape_filenames: list):
     # TODO: Add a few good, working Doctests
 
 
-
+def center(marble_block):
+    arble_block = np.load(marble_block)
+    print(marble_block.shape)
+    image = ndimage.measurements.center_of_mass(marble_block.astype('float32'))
+    print(image)
 
 
 if __name__ == '__main__':
@@ -289,5 +258,5 @@ if __name__ == '__main__':
             file = os.path.join(path, file_name)
             marble_block = np.load(file)
             get_orientations_possible(marble_block)
-            #print(marble_block.shape)
+           # center(marble_block)
 
