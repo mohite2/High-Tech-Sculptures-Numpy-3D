@@ -5,7 +5,7 @@ Assignment on Numpy: "High-Tech Sculptures"
 See assignment instructions in the README.md document AND in the
 TO DO comments below.
 """
-
+import os
 import numpy as np
 from scipy.ndimage import center_of_mass
 from typing import List
@@ -55,7 +55,7 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=False) -> 
     count = 0
     for combo in list_of_rotations:
         count += 1
-        if verbose:#why
+        if verbose:
             print('combination #{}: {}'.format(count, combo), end='')
 
         r = cube  # start with a view of cube unmodified for comparison
@@ -74,7 +74,7 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=False) -> 
             if verbose:
                 print(' ok.')
         orientations_seen.append(r.tostring())
-    return True ###Why
+    return True
 
 def get_orientations_possible(block: np.ndarray) -> List[List[dict]]:
     """Given a 3D numpy array, look at its shape to determine how many ways it
@@ -141,21 +141,44 @@ def get_orientations_possible(block: np.ndarray) -> List[List[dict]]:
         [{'k': 3, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}],
         [{'k': 3, 'axes': (1, 2)}, {'k': 3, 'axes': (0, 2)}],
     ]
-
+    sub_poss=[]
     # consider the 3-tuple shape of axes numbered 0, 1, 2 to represent (height, depth, width)
     (height, depth, width) = block.shape
-    counter=0
     if height == depth == width:
         return poss  # return all possibilities, it's a cube
     else:
-        for r90 in poss:
-            counter=counter+1
-            print(counter)
-            for mov in r90:
-                print(block.shape)
-                print(mov)
-                block = np.rot90(block, k=mov['k'], axes=mov['axes'])
-                print(block.shape)
+        count=0
+        for combo in poss:
+            print(combo)
+            print(count)
+            count += 1
+            r = block # start with a view of cube unmodified for comparison
+            for r90 in combo:  # apply all the rotations given in this combination
+                print(r.shape)
+                r = np.rot90(r, k=r90['k'], axes=r90['axes'])
+                print('r90', r90)
+                print(type(r90))
+                print('r', r.shape)
+                print(r.shape)
+                #print(type([r90]))
+            if r.shape == block.shape:
+                print('keep')
+                sub_poss.append(combo)
+            else:
+                print('drop')
+    print('sub',sub_poss)
+    print(len(sub_poss))
+    return(sub_poss)
+
+
+        # for r90 in poss:
+        #     counter=counter+1
+        #     print(counter)
+        #     for mov in r90:
+        #         print(block.shape)
+        #         print(mov)
+        #         block = np.rot90(block, k=mov['k'], axes=mov['axes'])
+        #         print(block.shape)
             # list_of_dict = [{} for i in range(singleRotation)]
             #print(are_rotations_unique([value]))
 
@@ -238,7 +261,7 @@ if __name__ == '__main__':
     #  just some examples of loading and manipulating the arrays.
 
     # Load a "block" of variable-density marble:
-    marble_block_1 = np.load(file='data/marble_block_1.npy')
+    marble_block_1 = np.load(file='data/marble_block_2.npy')
 
     # Load one array describing the 3D shape of the sculpture we want to carve from marble:
     shape_1 = np.load(file='data/shape_1.npy')
@@ -249,7 +272,7 @@ if __name__ == '__main__':
     # marble_block_1[shape_1 == 0] = 0
     # print(marble_block_1.shape)
     # print(marble_block_1)
-    carve_sculpture_from_density_block(shape_1,marble_block_1)
+    #carve_sculpture_from_density_block(shape_1,marble_block_1)
     #print(sculpture)
 
     # list1 = [[{'k': 1, 'axes': (1, 2)}, {'k': 2, 'axes': (0, 2)}]]
@@ -259,4 +282,12 @@ if __name__ == '__main__':
     #print(marble_block_7)
     #get_orientations_possible(marble_block_1)
     # print('mean density of unmodified block: {:.2f}'.format(np.nanmean(marble_block_1.astype('float32'))))
+    g = os.walk("./data")
+
+    for path, dir_list, file_list in g:
+        for file_name in file_list:
+            file = os.path.join(path, file_name)
+            marble_block = np.load(file)
+            get_orientations_possible(marble_block)
+            #print(marble_block.shape)
 

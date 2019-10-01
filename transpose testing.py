@@ -52,6 +52,7 @@ def are_rotations_unique(list_of_rotations: List[List[dict]], verbose=True) -> b
             print('combination #{}: {}'.format(count, combo), end='')
 
         r = cube  # start with a view of cube unmodified for comparison
+        print(r)
         for r90 in combo:  # apply all the rotations given in this combination
             r = np.rot90(r, k=r90['k'], axes=r90['axes'])
             print('r90',r90)
